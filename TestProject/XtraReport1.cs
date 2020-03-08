@@ -38,7 +38,7 @@ namespace TestProject
             // Create an XRLabel control for the report
             XRLabel helloWordLabel = new XRLabel()
             {
-                Text = "Hello, World abc!",
+                Text = "Hello, World!",
                 Font = new Font("Tahoma", 20f, FontStyle.Bold),
                 BoundsF = new RectangleF(0, 0, 250, 50),
             };
