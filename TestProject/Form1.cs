@@ -140,7 +140,9 @@ namespace TestProject
         private void button1_Click(object sender, EventArgs e)
         {
             //lookUpEdit1.EditValue = int.Parse(textBox1.Text.ToString());
-            barCodeControl1.Text = textBox1.Text;
+            //barCodeControl1.Text = textBox1.Text;
+            Form3 form3 = new Form3();
+            //form3.Show();
         }
 
         private void lookUpEdit2_EditValueChanged(object sender, EventArgs e)
@@ -240,7 +242,8 @@ namespace TestProject
             GridView gridView = sender as GridView;
             var value = gridView.GetRowCellValue(gridView.FocusedRowHandle, gridView.FocusedColumn);
             var value1 = gridView.GetRowCellValue(gridView.FocusedRowHandle, gridView.Columns["CategoryID"]);
-            MessageBox.Show("Cell value: " + value1.ToString(), "Message");
+            lookUpEdit2.EditValue = value1;
+            //MessageBox.Show("Cell value: " + value1.ToString(), "Message");
         }
     }
 }
