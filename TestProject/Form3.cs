@@ -231,11 +231,11 @@ namespace TestProject
         #region #PublishReport
         private void PublishReport(XtraReport report)
         {
-            //ReportPrintTool printTool = new ReportPrintTool(report);
-            //printTool.ShowPreviewDialog();
-            DocumentViewer viewer = new DocumentViewer();
-            viewer.DocumentSource = report;
-            viewer.Show();
+            ReportPrintTool printTool = new ReportPrintTool(report);
+            printTool.ShowPreviewDialog();
+            //DocumentViewer viewer = new DocumentViewer();
+            //viewer.DocumentSource = report;
+            //viewer.Show();
         }
         #endregion #PublishReport
     }
