@@ -141,8 +141,13 @@ namespace TestProject
         {
             //lookUpEdit1.EditValue = int.Parse(textBox1.Text.ToString());
             //barCodeControl1.Text = textBox1.Text;
-            Form3 form3 = new Form3();
+            //Form3 form3 = new Form3();
             //form3.Show();
+
+            string passDecrypt = null;
+            Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
+            passDecrypt = cls_EnDe.Encrypt(textBox1.Text, true);
+            textEdit1.Text = passDecrypt;
         }
 
         private void lookUpEdit2_EditValueChanged(object sender, EventArgs e)
@@ -244,6 +249,12 @@ namespace TestProject
             var value1 = gridView.GetRowCellValue(gridView.FocusedRowHandle, gridView.Columns["CategoryID"]);
             lookUpEdit2.EditValue = value1;
             //MessageBox.Show("Cell value: " + value1.ToString(), "Message");
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
+            textEdit2.Text = cls_EnDe.Decrypt(textEdit1.Text, true);
         }
     }
 }
