@@ -13,8 +13,13 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraPrinting.BarCode;
 using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Grid;
-using System.Net.Sockets;
+using DevExpress.Printing;
+using DevExpress.XtraPrinting;
+using DevExpress.XtraEditors;
+using DevExpress.Export;
+using DevExpress.Utils;
 using System.IO;
+using System.Diagnostics;
 
 namespace TestProject
 {
@@ -146,15 +151,60 @@ namespace TestProject
             //Form3 form3 = new Form3();
             //form3.Show();
 
-            string passDecrypt = null;
-            Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
-            passDecrypt = cls_EnDe.Encrypt(textBox1.Text, true);
-            textEdit1.Text = passDecrypt;
+            //string passDecrypt = null;
+            //Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
+            //passDecrypt = cls_EnDe.Encrypt(textBox1.Text, true);
+            //textEdit1.Text = passDecrypt;
+            ExportExcel("");
+        }
+
+        private bool ExportExcel(string filename)
+        {
+            try
+            {
+                var dialog = new SaveFileDialog();
+                dialog.Title = @"Export file to Excel";
+                dialog.FileName = filename;
+                dialog.Filter = @"Microsoft Excel|*.xlsx";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    gridView1.RefreshData();
+                    gridView1.OptionsPrint.ShowPrintExportProgress = true;
+                    gridView1.OptionsPrint.AllowCancelPrintExport = true;                    
+
+                    XlsxExportOptions options = new XlsxExportOptions();
+                    options.TextExportMode = TextExportMode.Text;
+                    options.ExportMode = XlsxExportMode.SingleFile;
+
+                    ExportSettings.DefaultExportType = ExportType.Default;
+                    gridView1.ExportToXlsx(dialog.FileName, options);
+                    XtraMessageBox.Show("Successed!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information, DefaultBoolean.True);
+                    
+                    if (File.Exists(dialog.FileName))
+                    {
+                        if (XtraMessageBox.Show("Do you want open file? ", "Message", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                        {
+                            Process.Start(dialog.FileName);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                XtraMessageBox.Show("Error: " + e, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
         }
 
         private void lookUpEdit2_EditValueChanged(object sender, EventArgs e)
         {
             lookUpEdit1.EditValue = null;
+        }
+
+        private void ShowGridViewColumns()
+        {
+            
         }
 
         private void LoadDataGrid()
@@ -181,6 +231,8 @@ namespace TestProject
                 //Binding Master table to gridControl
                 gridControl1.DataSource= ds.Tables["Categories"];
                 gridControl1.ForceInitialize();
+
+                gridView1.Columns["CategoryID"].VisibleIndex = -1;                
 
                 //Set the columns of master GridView's columns to AutoResize 
                 gridView1.OptionsView.ColumnAutoWidth = true;
@@ -255,35 +307,13 @@ namespace TestProject
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            //Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
-            //textEdit2.Text = cls_EnDe.Decrypt(textEdit1.Text, true);
+            Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
+            textEdit2.Text = cls_EnDe.Decrypt(textEdit1.Text, true);
+        }
 
-            var client = new TcpClient("localhost", 123);
-            // Translate the passed message into ASCII and store it as a Byte array.
-            //Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
-
-            // Get a client stream for reading and writing. 
-            NetworkStream stream = client.GetStream();
-
-            // Send the message to the connected TcpServer. 
-            //stream.Write(data, 0, data.Length); //(**This is to send data using the byte method**) 
-
-            // Buffer to store the response bytes.
-            //data = new Byte[256];
-
-            // String to store the response ASCII representation.
-            String responseData = String.Empty;
-
-            // Read the first batch of the TcpServer response bytes.
-            //Int32 bytes = stream.Read(data, 0, data.Length); //(**This receives the data using the byte method**)
-
-            //responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes); //(**This converts it to string**)
-
-            string path = @"D:\Text\test.txt";
-            File.AppendAllText(path, "Text from TCP IP"); //(Write string to file)
-
-            stream.Close();
-            client.Close();
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ShowGridViewColumns();
         }
     }
 }
