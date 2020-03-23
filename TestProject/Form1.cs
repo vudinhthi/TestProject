@@ -20,6 +20,7 @@ using DevExpress.XtraPrinting;
 using DevExpress.Export;
 using DevExpress.XtraEditors;
 using System.Diagnostics;
+using DevExpress.XtraWaitForm;
 =======
 using DevExpress.Printing;
 using DevExpress.XtraPrinting;
@@ -348,7 +349,16 @@ namespace TestProject
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ShowGridViewColumns();
+            ProgressPanel progressPanel1 = new ProgressPanel();
+            progressPanel1.Caption = "Loading";
+            progressPanel1.Description = "Please wait...";
+            progressPanel1.WaitAnimationType = DevExpress.Utils.Animation.WaitingAnimatorType.Ring;
+            progressPanel1.Parent = this;
+            progressPanel1.Top = 100;
+            progressPanel1.Left = 100;
+            this.Controls.Add(progressPanel1);
+            progressPanel1.Show();
+            progressPanel1.BringToFront();
         }
     }
 }
