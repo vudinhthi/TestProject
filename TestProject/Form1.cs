@@ -13,6 +13,14 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraPrinting.BarCode;
 using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Grid;
+<<<<<<< HEAD
+using System.Net.Sockets;
+using System.IO;
+using DevExpress.XtraPrinting;
+using DevExpress.Export;
+using DevExpress.XtraEditors;
+using System.Diagnostics;
+=======
 using DevExpress.Printing;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraEditors;
@@ -20,7 +28,7 @@ using DevExpress.Export;
 using DevExpress.Utils;
 using System.IO;
 using System.Diagnostics;
-
+>>>>>>> c00eb78dc2e0285977ef1ff277a8908a45ae1786
 namespace TestProject
 {
     public partial class Form1 : Form
@@ -307,8 +315,35 @@ namespace TestProject
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
-            textEdit2.Text = cls_EnDe.Decrypt(textEdit1.Text, true);
+            //Cls_EnDeCrypt cls_EnDe = new Cls_EnDeCrypt();
+            //textEdit2.Text = cls_EnDe.Decrypt(textEdit1.Text, true);
+
+            var client = new TcpClient("localhost", 123);
+            // Translate the passed message into ASCII and store it as a Byte array.
+            //Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+
+            // Get a client stream for reading and writing. 
+            NetworkStream stream = client.GetStream();
+
+            // Send the message to the connected TcpServer. 
+            //stream.Write(data, 0, data.Length); //(**This is to send data using the byte method**) 
+
+            // Buffer to store the response bytes.
+            //data = new Byte[256];
+
+            // String to store the response ASCII representation.
+            String responseData = String.Empty;
+
+            // Read the first batch of the TcpServer response bytes.
+            //Int32 bytes = stream.Read(data, 0, data.Length); //(**This receives the data using the byte method**)
+
+            //responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes); //(**This converts it to string**)
+
+            string path = @"D:\Text\test.txt";
+            File.AppendAllText(path, "Text from TCP IP"); //(Write string to file)
+
+            stream.Close();
+            client.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
