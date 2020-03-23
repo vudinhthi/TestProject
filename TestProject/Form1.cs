@@ -21,6 +21,7 @@ using DevExpress.Export;
 using DevExpress.XtraEditors;
 using System.Diagnostics;
 using DevExpress.XtraWaitForm;
+using DevExpress.Utils;
 =======
 using DevExpress.Printing;
 using DevExpress.XtraPrinting;
