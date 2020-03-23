@@ -26,11 +26,21 @@ namespace TestProject.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;User ID=sa;Password=" +
-            "12345678")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=FVN-PC-IT-09\\SQLEXPRESS;Initial Catalog=Northwind;User ID=sa;Password" +
+            "=12345678")]
         public string NorthwindConnectionString {
             get {
                 return ((string)(this["NorthwindConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=FVN-PC-IT-09\\SQLEXPRESS;Initial Catalog=ColorMix;User ID=sa")]
+        public string ColorMixConnectionString {
+            get {
+                return ((string)(this["ColorMixConnectionString"]));
             }
         }
     }
