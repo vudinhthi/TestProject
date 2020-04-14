@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraPrinting.BarCode.QRCodeGenerator qrCodeGenerator2 = new DevExpress.XtraPrinting.BarCode.QRCodeGenerator();
+            DevExpress.XtraPrinting.BarCode.QRCodeGenerator qrCodeGenerator4 = new DevExpress.XtraPrinting.BarCode.QRCodeGenerator();
+            DevExpress.XtraPrinting.BarCode.Code128Generator code128Generator4 = new DevExpress.XtraPrinting.BarCode.Code128Generator();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -45,6 +46,9 @@
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.button2 = new System.Windows.Forms.Button();
             this.progressBarControl1 = new DevExpress.XtraEditors.ProgressBarControl();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.barCodeControl2 = new DevExpress.XtraEditors.BarCodeControl();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -142,14 +146,15 @@
             this.barCodeControl1.Location = new System.Drawing.Point(291, 12);
             this.barCodeControl1.Name = "barCodeControl1";
             this.barCodeControl1.Padding = new System.Windows.Forms.Padding(10, 2, 10, 0);
-            this.barCodeControl1.Size = new System.Drawing.Size(107, 101);
-            qrCodeGenerator2.ErrorCorrectionLevel = DevExpress.XtraPrinting.BarCode.QRCodeErrorCorrectionLevel.M;
-            qrCodeGenerator2.Version = DevExpress.XtraPrinting.BarCode.QRCodeVersion.Version1;
-            this.barCodeControl1.Symbology = qrCodeGenerator2;
+            this.barCodeControl1.Size = new System.Drawing.Size(237, 100);
+            qrCodeGenerator4.ErrorCorrectionLevel = DevExpress.XtraPrinting.BarCode.QRCodeErrorCorrectionLevel.M;
+            qrCodeGenerator4.Version = DevExpress.XtraPrinting.BarCode.QRCodeVersion.Version1;
+            this.barCodeControl1.Symbology = qrCodeGenerator4;
             this.barCodeControl1.TabIndex = 6;
             // 
             // textEdit1
             // 
+            this.textEdit1.EditValue = "Test thoi";
             this.textEdit1.Location = new System.Drawing.Point(534, 12);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.Mask.BeepOnError = true;
@@ -199,11 +204,40 @@
             this.progressBarControl1.Size = new System.Drawing.Size(273, 30);
             this.progressBarControl1.TabIndex = 13;
             // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Location = new System.Drawing.Point(534, 92);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(254, 23);
+            this.simpleButton2.TabIndex = 14;
+            this.simpleButton2.Text = "Check update...";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // barCodeControl2
+            // 
+            this.barCodeControl2.Location = new System.Drawing.Point(534, 151);
+            this.barCodeControl2.Name = "barCodeControl2";
+            this.barCodeControl2.Padding = new System.Windows.Forms.Padding(10, 2, 10, 0);
+            this.barCodeControl2.Size = new System.Drawing.Size(107, 23);
+            this.barCodeControl2.Symbology = code128Generator4;
+            this.barCodeControl2.TabIndex = 15;
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Location = new System.Drawing.Point(534, 122);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(254, 23);
+            this.simpleButton3.TabIndex = 16;
+            this.simpleButton3.Text = "Test thoi";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 517);
+            this.Controls.Add(this.simpleButton3);
+            this.Controls.Add(this.barCodeControl2);
+            this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.progressBarControl1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textEdit2);
@@ -250,6 +284,9 @@
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private System.Windows.Forms.Button button2;
         private DevExpress.XtraEditors.ProgressBarControl progressBarControl1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.BarCodeControl barCodeControl2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton3;
     }
 }
 

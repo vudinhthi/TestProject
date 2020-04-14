@@ -32,6 +32,8 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 
+using System.Deployment.Application;
+
 namespace TestProject
 {
     public partial class Form1 : Form
@@ -371,6 +373,54 @@ namespace TestProject
                 progressPanel1.WaitAnimationType = DevExpress.Utils.Animation.WaitingAnimatorType.Bar;
 
                 Thread.Sleep(10);                
+            }
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            UpdateCheckInfo info;
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                ApplicationDeployment ad = ApplicationDeployment.CurrentDeployment;
+                try
+                {
+                    info = ad.CheckForDetailedUpdate();
+                }
+                catch(DeploymentDownloadException dde)
+                {
+                    MessageBox.Show("DeploymentDownloadException: " + dde.Message);
+                    return;
+                }
+                catch(InvalidDeploymentException ide)
+                {
+                    MessageBox.Show("InvalidDeploymentException: " + ide.Message);
+                    return;
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    MessageBox.Show("InvalidOperationException: " + ioe.Message);
+                    return;
+                }
+                if (info.UpdateAvailable)
+                {
+                    if(MessageBox.Show("Do you want to update?","Message",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        try
+                        {                            
+                            ad.Update();
+                            Application.Restart();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Exception: " + ex.Message);
+                            return;
+                        }
+                    }                    
+                }
+                else
+                {
+                    MessageBox.Show("Updated with new version!");
+                }
             }
         }
     }
